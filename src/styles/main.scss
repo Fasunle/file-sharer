@@ -1,3 +1,6 @@
+@use './variables' as *;
+@use './errors' as *;
+@use './auth' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
