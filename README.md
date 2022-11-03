@@ -1,3 +1,3 @@
-# tenatica-ui
+# File Sharing App - tenatica-ui
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-6upgjn)
+A file sharing application that allows one user to share a file with another user.
