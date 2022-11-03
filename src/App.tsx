@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Auth from './components/Auth';
 import File from './components/File';
 import Files from './components/Files';
