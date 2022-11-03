@@ -1,0 +1,22 @@
+name: Linter
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  Lint-codebase-with-super-linter:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - run: npm upgrade npm
+
+      - name: Install project dependences
+        run: npm install
+
+      - name: Format code
+        run: |
+          npm run lint
+          npm run format
