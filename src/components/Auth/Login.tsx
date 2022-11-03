@@ -1,10 +1,12 @@
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {signInWithEmailAndPassword, AuthError} from 'firebase/auth';
+import {useState} from 'react';
 import auth from '../../config/auth';
 import {Error} from '../errors';
 
 const Login = () => {
+  const [loginError, setLoginError] = useState('');
   const {
     handleSubmit,
     register,
@@ -14,10 +16,11 @@ const Login = () => {
   const signIn = ({email, password}: {email: string; password: string}) => {
     signInWithEmailAndPassword(auth, email as string, password)
       // TODO: save user information to localStorage
-      .then((credentials) => {
-        localStorage.set('userRefreshToken', credentials.user.refreshToken);
+      .then(async (credentials) => {
+        // localStorage.setItem( 'user',  );
+        // console.log({credentials, token: await credentials.user.getIdToken()});
       })
-      .catch((error) => console.error(error?.message));
+      .catch((error: AuthError) => setLoginError(error.message));
   };
   return (
     <div className='auth'>
@@ -67,6 +70,8 @@ const Login = () => {
             {...register('password', {required: 'Password is required'})}
           />
         </div>
+
+        <Error message={loginError} />
         <button type='submit' className='login__form--btn'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -85,7 +90,8 @@ const Login = () => {
           Login
         </button>
         <p className='info'>
-          You have an account already&#63; <Link to='/signup'>Signup</Link>
+          You don&apos;t have an account already&#63;{' '}
+          <Link to='/auth/signup'>Signup</Link>
         </p>
       </form>
     </div>
