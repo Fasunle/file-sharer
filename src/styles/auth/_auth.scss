@@ -10,4 +10,106 @@
     text-align: center;
     font-family: $poppins;
   }
+
+  .login__form,
+  .signup__form {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    min-width: 18rem;
+    max-width: clamp(30rem, 40rem, 45rem);
+    margin-inline: auto;
+
+    // size
+    padding: 1em;
+    background-color: lighten($neutral, 10%);
+
+    > div {
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: lighten($text, 50%);
+        font-weight: 500;
+        font-size: 1.1rem;
+
+        .asterick {
+          color: red;
+          background-color: transparent;
+          line-height: 1;
+          font-size: 1.2rem;
+        }
+      }
+
+      input {
+        // border: 1px blue dashed;
+        padding: 0.5rem;
+        transition: outline 400ms ease-in;
+        border: 2px $neutral solid;
+        color: lighten($text, 20%);
+        outline: 1px transparent solid;
+        outline-offset: 0.25px;
+        font-size: 1.3rem;
+        width: 100%;
+
+        // little shadow
+        box-shadow: $box-shadow-3;
+        border-radius: $border-radius;
+
+        &:focus {
+          outline: 2px solid darken($neutral, 5%);
+        }
+
+        // cursor color
+        caret-color: $text !important;
+      }
+    }
+
+    &--btn {
+      background-color: $secondary !important;
+      color: $neutral;
+      cursor: pointer;
+      font-size: 1.4rem;
+      line-height: 1;
+      font-weight: 600;
+      padding: 0.6em 1.2em;
+      box-shadow: $box-shadow-2;
+      border-radius: $border-radius;
+      margin-top: 1em;
+
+      &:hover {
+        background-color: darken($secondary, 2%) !important;
+      }
+
+      // layout
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      align-items: center;
+
+      .icon {
+        font-size: 2rem;
+        transition: transform 300ms ease-in-out;
+
+        &:hover,
+        &:active {
+          transform: translateX(5px);
+        }
+      }
+    }
+
+    .info {
+      margin: 0.25em 0;
+      color: lighten($text, 50%);
+      font-size: 1.2rem;
+      text-align: center;
+
+      a {
+        text-decoration: underline;
+        text-decoration-color: $accent;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
 }

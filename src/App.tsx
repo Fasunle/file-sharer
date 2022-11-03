@@ -7,7 +7,8 @@ import Home from './components/Home';
 function App() {
   return (
     <Routes>
-      <Route element={<Auth />} path='/login' />
+      <Route element={<Auth />} path='/auth/signup' />
+      <Route element={<Auth />} path='/auth/login' />
       <Route element={<Files />} path='/files' />
       <Route element={<File />} path='/files/:id' />
       <Route element={<Home />} path='/' />
