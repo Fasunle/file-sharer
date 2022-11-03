@@ -1,0 +1,12 @@
+@use './constants' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+// base font
+* {
+  color: lighten($text, 40%);
+  font-family: $poppins;
+  font-weight: 400;
+  line-height: 1;
+}
