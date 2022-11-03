@@ -11,8 +11,8 @@ const Login = () => {
     formState: {errors},
   } = useForm<{email: string; password: string}>();
 
-  const signIn = ({email, password}: {email: String; password: string}) => {
-    signInWithEmailAndPassword(auth, email as any, password)
+  const signIn = ({email, password}: {email: string; password: string}) => {
+    signInWithEmailAndPassword(auth, email as string, password)
       // TODO: save user information to localStorage
       .then((credentials) => {
         localStorage.set('userRefreshToken', credentials.user.refreshToken);
