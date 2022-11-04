@@ -13,7 +13,8 @@
   }
 
   .login__form,
-  .signup__form {
+  .signup__form,
+  .reset__form {
     display: flex;
     gap: 1rem;
     flex-direction: column;
@@ -117,11 +118,13 @@
   }
 
   &--container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    padding-inline: 1em;
+    @include tablet-up {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      padding-inline: 1em;
+    }
 
     // on tablet
     @include tablet-up {
@@ -214,6 +217,16 @@
           box-shadow: $box-shadow-2;
         }
       }
+    }
+  }
+  // reset password form
+  &--reset > form {
+    .info {
+      margin-bottom: 2em;
+    }
+    // make height thesame as login form card
+    @include desktop {
+      height: 32em;
     }
   }
 }
