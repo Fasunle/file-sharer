@@ -1,0 +1,13 @@
+@use '../../abstract/variables' as *;
+
+.alert-info {
+  font-size: 1.3rem;
+  font-family: $poppins;
+  font-weight: 500;
+  padding: 1em;
+
+  // make text readable
+  max-width: 30ch;
+  margin: auto;
+  text-align: center;
+}

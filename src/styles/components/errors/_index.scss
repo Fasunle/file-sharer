@@ -1,0 +1,9 @@
+@use '../../abstract/variables' as *;
+
+.error {
+  color: $primary;
+  font-size: 1.1rem;
+  line-height: 0.9;
+  padding: 0.5em 0;
+  font-variant-ligatures: historical-ligatures;
+}

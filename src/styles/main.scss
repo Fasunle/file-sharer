@@ -1,7 +1,8 @@
 @use './abstract' as *;
-@use './errors' as *;
-@use './utils' as *;
-@use './auth' as *;
+@use './components/errors' as *;
+@use './components/utils' as *;
+@use './components/auth' as *;
+@use './components/home' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
