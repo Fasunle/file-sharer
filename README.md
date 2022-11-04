@@ -28,7 +28,11 @@ The application is avalable in production at [here](tenatica-ui.vercel.app).
 
 ## Features
 
-`/login` User sigin to the app. The signin is handled by firebase authentication. Information about the user is then stored to the database.
+`/auth/signup` User Create an account with Email and Password only. They are dirrectly logged in upon successful signup.
+
+`/auth/reset` User can change their password if the forgot or feel the password has been leaked.
+
+`/auth/login` User sigin to the app. The signin is handled by firebase authentication. Information about the user is then stored to the database.
 
 `/files` Displays list of all file shared with little information. User can click on each file to explore more information about the file.
 
