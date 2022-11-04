@@ -1,4 +1,5 @@
-@use '../variables' as *;
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
 
 .auth {
   .title {
@@ -12,7 +13,8 @@
   }
 
   .login__form,
-  .signup__form {
+  .signup__form,
+  .reset__form {
     display: flex;
     gap: 1rem;
     flex-direction: column;
@@ -25,6 +27,8 @@
     // size
     padding: 1em;
     background-color: lighten($neutral, 10%);
+
+    border-radius: $border-radius;
 
     > div {
       label {
@@ -112,4 +116,122 @@
       }
     }
   }
+
+  &--container {
+    @include tablet-up {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      padding-inline: 1em;
+    }
+
+    // on tablet
+    @include tablet-up {
+      padding-inline: 2em;
+      margin: auto;
+      max-width: clamp(25em, 40em, 50em);
+    }
+
+    // on desktop
+    @include desktop {
+      flex-direction: row;
+      max-width: clamp(50em, 60em, 80em);
+      margin: auto;
+    }
+
+    .auth__card--container {
+      padding: 1em;
+      display: none; // remove on small screen devices
+      // shadow
+      box-shadow: $box-shadow-2;
+      background-color: darken($neutral, 5%);
+      border-radius: $border-radius;
+
+      > div:first-child {
+        margin-bottom: 2em;
+      }
+
+      @include desktop {
+        align-items: center;
+        display: flex;
+        height: 25em;
+        justify-content: space-between;
+        margin: auto;
+        width: 85%;
+
+        > div:first-child {
+          margin: 0;
+        }
+      }
+
+      > div {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 6.25em;
+        justify-content: space-around;
+        text-align: center;
+
+        // prevent overflow
+        height: max-content;
+
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.3;
+          font-weight: 500;
+        }
+
+        .btn {
+          background-color: transparent;
+          cursor: pointer;
+          font-size: 1.3rem;
+          padding: 0.5em 1em;
+          text-decoration: underline;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  // main container
+  &--container {
+    position: relative;
+    @include desktop {
+      padding: 0;
+      .auth__card--container {
+        z-index: 1;
+        position: relative;
+      }
+
+      .overlay {
+        z-index: 10;
+        top: 7rem;
+        position: absolute;
+        transform: translateX(-12rem);
+        transition: transform 400ms ease-in-out;
+
+        .auth--login,
+        .auth--reset {
+          max-width: 100%;
+          box-shadow: $box-shadow-2;
+        }
+      }
+    }
+  }
+  // reset password form
+  &--reset > form {
+    .info {
+      margin-bottom: 2em;
+    }
+    // make height thesame as login form card
+    @include desktop {
+      height: 32em;
+    }
+  }
+}
+
+// push forgot password to the right
+.to-right {
+  transform: translateX(12rem) !important;
 }

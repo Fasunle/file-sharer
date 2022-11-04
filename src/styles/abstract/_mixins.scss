@@ -1,0 +1,17 @@
+@use './variables' as *;
+
+@mixin tablet-up {
+  @media only screen and (min-width: $tablet-up) {
+    @content;
+  }
+}
+
+@mixin colorer {
+  background-color: red;
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $desktop) {
+    @content;
+  }
+}

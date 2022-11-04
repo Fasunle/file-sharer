@@ -23,7 +23,7 @@ const Login = () => {
       .catch((error: AuthError) => setLoginError(error.message));
   };
   return (
-    <div className='auth'>
+    <div className='auth auth--reset'>
       <form
         className='login__form'
         onSubmit={handleSubmit((data) =>
