@@ -27,6 +27,8 @@
     padding: 1em;
     background-color: lighten($neutral, 10%);
 
+    border-radius: $border-radius;
+
     > div {
       label {
         display: block;
@@ -137,6 +139,7 @@
 
     .auth__card--container {
       padding: 1em;
+      display: none; // remove on small screen devices
       // shadow
       box-shadow: $box-shadow-2;
       background-color: darken($neutral, 5%);
@@ -188,4 +191,34 @@
       }
     }
   }
+  // main container
+  &--container {
+    position: relative;
+    @include desktop {
+      padding: 0;
+      .auth__card--container {
+        z-index: 1;
+        position: relative;
+      }
+
+      .overlay {
+        z-index: 10;
+        top: 7rem;
+        position: absolute;
+        transform: translateX(-12rem);
+        transition: transform 400ms ease-in-out;
+
+        .auth--login,
+        .auth--reset {
+          max-width: 100%;
+          box-shadow: $box-shadow-2;
+        }
+      }
+    }
+  }
+}
+
+// push forgot password to the right
+.to-right {
+  transform: translateX(12rem) !important;
 }
