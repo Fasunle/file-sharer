@@ -1,11 +1,20 @@
+import {useState, ChangeEvent} from 'react';
 import {useForm} from 'react-hook-form';
 import {Error} from '../errors';
 
 export default function FileUpload() {
   const {
     formState: {errors},
+    handleSubmit,
     register,
   } = useForm<{filename: string; email: string}>();
+  const [files, setFiles] = useState<string[]>([]);
+  // https://pinoria.com/how-to-add-typescript-types-for-react-checkbox-events-and-handlers/#:~:text=To%20add%20TypeScript%20types%20for%20React%20checkbox%20events,%7D%3B%20return%20%3Cinput%20type%3D%22checkbox%22%20onChange%3D%20%7BonChange%7D%20%2F%3E%3B%20%7D%3B
+
+  const addNewFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.value;
+    setFiles([...files, file]);
+  };
 
   return (
     <section className='uploader'>
@@ -16,6 +25,7 @@ export default function FileUpload() {
               type='file'
               {...register('filename', {required: true})}
               className='file-input'
+              onChange={addNewFile}
             />
             <button className='btn btn--upload'>
               <svg
