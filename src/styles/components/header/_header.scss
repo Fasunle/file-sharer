@@ -31,4 +31,18 @@
       margin-left: 0.5em;
     }
   }
+
+  .user-profile {
+    display: none;
+  }
+
+  @include desktop {
+    .user-profile {
+      display: block;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
 }
