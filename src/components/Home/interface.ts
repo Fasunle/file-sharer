@@ -3,3 +3,8 @@ export interface IFileCardProps {
   type: string;
   size: string;
 }
+
+export type AsidePropsType = {
+  files: IFileCardProps[];
+  isOpen: boolean;
+};
