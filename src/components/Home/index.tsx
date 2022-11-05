@@ -8,7 +8,12 @@ export default function Home() {
       <Header setIsOpen={setIsOpen} isOpen={isOpen} />
       <main className='home__content'>Main</main>
       <aside className={`home__sidebar ${isOpen && 'show-sidebar'}`}>
-        Aside
+        <ul className='user-info'>
+          <li className='username'>
+            <h2>Kehinde Fasunle</h2> <span></span>
+          </li>
+          <li className='email'>kfasunle@gmail.com</li>
+        </ul>
       </aside>
     </section>
   );
