@@ -23,16 +23,16 @@ export default function FileUpload() {
                 fill='none'
                 viewBox='0 0 24 24'
                 strokeWidth={1.5}
-                stroke='#00bfb2'
-                className='w-12 h-12 icon'
+                stroke='currentColor'
+                className='w-14 h-14 icon'
               >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
-                  d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5'
+                  d='M12 4.5v15m7.5-7.5h-15'
                 />
               </svg>{' '}
-              Upload
+              Select
             </button>
           </form>
 
@@ -73,13 +73,13 @@ export default function FileUpload() {
             fill='none'
             viewBox='0 0 24 24'
             strokeWidth={1.5}
-            stroke='#191923'
-            className='w-6 h-6'
+            stroke='#44445f'
+            className='w-10 h-10 p-1 icon'
           >
             <path
               strokeLinecap='round'
               strokeLinejoin='round'
-              d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
+              d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5'
             />
           </svg>
         </button>

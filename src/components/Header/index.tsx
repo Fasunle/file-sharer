@@ -7,7 +7,7 @@ export default function Header({
   setIsOpen,
 }: {
   isOpen: boolean;
-  setIsOpen: (open: boolean) => any;
+  setIsOpen: (open: boolean) => void;
 }) {
   const [avatarUrl, setAvatarUrl] = useState('');
   return (
