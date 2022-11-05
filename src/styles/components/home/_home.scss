@@ -19,14 +19,15 @@
   }
 
   &__content {
-    // border: 3px red solid;
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
     top: 5rem;
     min-height: calc(100vh - 5rem);
-    // overflow: hidden scroll;
+    // hidden scroll;
+    overflow-y: scroll;
+    @include hide-scrollbar;
     z-index: 10;
 
     @include desktop {
@@ -40,6 +41,44 @@
 
       // desktop styles
       grid-column: 2 / 11;
+    }
+    // hero section
+    &--banner {
+      .banner-header {
+        text-align: center;
+        padding: 1em;
+
+        .title {
+          font-size: 2rem;
+          font-weight: 800;
+          line-height: 1.4;
+
+          @include tablet-up{
+            font-size: 3rem;
+            line-height: 1.1;
+          }
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        // place center
+        margin: auto;
+        margin-bottom: 1em;
+        max-width: clamp(40vw + 2rem, 42vw, 45vh);
+      }
+
+      .image-container {
+        > .icon {
+          // make icon card
+          border: 5px $neutral solid;
+          padding: 0.3em;
+          border-radius: 50%;
+          box-shadow: $box-shadow-2;
+        }
+      }
     }
   }
 
@@ -125,9 +164,7 @@
       max-width: 65vw;
 
       // remove scrollbar
-      &::-webkit-scrollbar {
-        display: none;
-      }
+      @include hide-scrollbar;
 
       .title {
         font-family: $lato;
@@ -190,6 +227,5 @@
 }
 
 .show-sidebar {
-  // transform: translateX(23vw);
   transform: translateX(30vw);
 }
