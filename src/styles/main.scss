@@ -4,6 +4,7 @@
 @use './components/header' as *;
 @use './components/auth' as *;
 @use './components/home' as *;
+@use './form' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

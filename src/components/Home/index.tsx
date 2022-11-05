@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import Header from '../Header';
 import AsideComponent from './Aside';
+import FileUpload from './FileUpload';
 import HeroComponent from './HeroBanner';
 import {IFileCardProps} from './interface';
 
@@ -13,7 +14,7 @@ export default function Home() {
       <Header setIsOpen={setIsOpen} isOpen={isOpen} />
       <main className='home__content'>
         <HeroComponent />
-        <section className='home__content--file-transfer'>Transfer</section>
+        <FileUpload />
         <section className='home_content--more'>More</section>
       </main>
       <AsideComponent files={files} isOpen={isOpen} />
