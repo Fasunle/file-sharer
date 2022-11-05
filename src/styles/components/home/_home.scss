@@ -118,6 +118,61 @@
       }
     }
 
+    .file__share {
+      height: 100%;
+      overflow-y: scroll;
+      max-height: 65vh;
+      max-width: 65vw;
+
+      // remove scrollbar
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .title {
+        font-family: $lato;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 0.5em;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        background-color: transparent !important;
+        backdrop-filter: blur(20px);
+      }
+
+      .files {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .file {
+        background-color: $neutral !important;
+        padding: 0.5em;
+        font-size: 1rem;
+        text-align: center;
+        margin-inline: 0.5em;
+        .name {
+          font-size: 1.125rem;
+          font-weight: 600;
+          line-height: 1.4;
+        }
+
+        .type {
+          color: lighten($text, 40%);
+        }
+
+        .size {
+          font-size: 0.825rem;
+          color: $accent;
+        }
+      }
+      @include desktop {
+        // max-width: 40vw;
+      }
+    }
+
     @include desktop {
       // override mobile and tablet styles
       position: static;
