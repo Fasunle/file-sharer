@@ -22,6 +22,7 @@ export default function Home() {
         <ul className='file__share'>
           <h3 className='title'>Recently Shared</h3>
           <li className='files'>
+            {!files.length && <div className='file'>No Shared file</div>}
             {files.map((file) => (
               <FileCard
                 key={file.name}
