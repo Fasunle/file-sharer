@@ -1,0 +1,39 @@
+@use '../abstract' as *;
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: lighten($text, 50%);
+  font-weight: 500;
+  font-size: 1.1rem;
+
+  .asterick {
+    color: red;
+    background-color: transparent;
+    line-height: 1;
+    font-size: 1.2rem;
+  }
+}
+
+input {
+  // border: 1px blue dashed;
+  padding: 1rem !important;
+  transition: outline 400ms ease-in;
+  border: 2px $neutral solid;
+  color: lighten($text, 20%);
+  outline: 1px transparent solid;
+  outline-offset: 0.25px;
+  font-size: 1.3rem !important;
+  width: 100%;
+  background-color: lighten($neutral, 5%) !important;
+  // little shadow
+  box-shadow: $box-shadow-3;
+  border-radius: $border-radius;
+
+  &:focus {
+    outline: 2px solid darken($neutral, 5%);
+  }
+
+  // cursor color
+  caret-color: $text !important;
+}

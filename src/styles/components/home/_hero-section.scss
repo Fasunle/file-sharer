@@ -1,0 +1,46 @@
+@use '../../abstract' as *;
+
+.home {
+  &__content {
+    // hero section
+    &--banner {
+      padding: 1em 0;
+
+      .banner-header {
+        text-align: center;
+        padding: 1em;
+
+        .title {
+          font-size: 2rem;
+          font-weight: 800;
+          line-height: 1.4;
+
+          @include tablet-up {
+            font-size: 3rem;
+            line-height: 1.1;
+          }
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        // place center
+        margin: auto;
+        margin-bottom: 1em;
+        max-width: clamp(40vw + 2rem, 42vw, 45vh);
+      }
+
+      .image-container {
+        > .icon {
+          // make icon card
+          border: 5px $neutral solid;
+          padding: 0.3em;
+          border-radius: 50%;
+          box-shadow: $box-shadow-2;
+        }
+      }
+    }
+  }
+}

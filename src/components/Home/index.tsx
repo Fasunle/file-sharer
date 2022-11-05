@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import Header from '../Header';
 import AsideComponent from './Aside';
+import FileUpload from './FileUpload';
+import HeroComponent from './HeroBanner';
 import {IFileCardProps} from './interface';
 
 export default function Home() {
@@ -10,7 +12,11 @@ export default function Home() {
   return (
     <section className='home'>
       <Header setIsOpen={setIsOpen} isOpen={isOpen} />
-      <main className='home__content'>Main</main>
+      <main className='home__content'>
+        <HeroComponent />
+        <FileUpload />
+        {/* <section className='home_content--more'>More</section> */}
+      </main>
       <AsideComponent files={files} isOpen={isOpen} />
     </section>
   );
