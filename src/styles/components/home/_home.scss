@@ -1,0 +1,195 @@
+@use '../../abstract/' as *;
+
+.home {
+  // position: relative;
+  overflow: hidden;
+
+  // border: 3px green solid;
+  @include desktop {
+    position: static;
+    z-index: 1;
+    width: unset;
+    height: unset;
+
+    // on large screens
+    display: grid;
+    grid-template-columns: 5rem repeat(12, 1fr) 5rem;
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+  }
+
+  &__content {
+    // border: 3px red solid;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 5rem;
+    min-height: calc(100vh - 5rem);
+    // overflow: hidden scroll;
+    z-index: 10;
+
+    @include desktop {
+      // override mobile and tablet styles
+      position: static;
+      z-index: 1;
+      width: unset;
+      min-height: unset;
+      inset: unset;
+      padding-top: 2em;
+
+      // desktop styles
+      grid-column: 2 / 11;
+    }
+  }
+
+  &__sidebar {
+    // border: 3px yellow solid;
+    height: 100vh;
+    width: 75vw;
+    position: relative;
+    inset: 0;
+    z-index: 20;
+
+    padding: 1em;
+    padding-top: 7rem;
+
+    // hide from screen
+    transform: translateX(100vw);
+
+    // slowly reveal or hide
+    transition: all 400ms ease;
+    // make sidebar a card
+    box-shadow: $box-shadow-top-left;
+
+    background-color: lighten($neutral, 5%) !important;
+
+    // sidebar content
+    .user-info {
+      background-color: lighten($secondary, 5%) !important;
+      border-radius: $border-radius;
+      box-shadow: $box-shadow-top-left;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.4rem;
+      font-weight: 500;
+      gap: 1rem;
+      padding: 1em;
+      margin-bottom: 1em;
+      width: fit-content;
+
+      .username {
+        padding: 0.4em;
+        position: relative;
+        h2 {
+          position: relative;
+          width: 15ch;
+          z-index: 10;
+        }
+        span {
+          position: absolute;
+          inset: 0;
+
+          background-color: $accent !important;
+          // force size on empty span
+          width: 15ch;
+          height: 100%;
+          // slant
+          transform: skewY(-1deg);
+
+          border-bottom-right-radius: 20px;
+          border-top-left-radius: 20px;
+          border-left: 4px solid lighten($text, 10%);
+          border-right: 4px solid lighten($text, 10%);
+          box-shadow: $box-shadow-2;
+        }
+      }
+
+      .email {
+        font-size: 1.2rem;
+        line-height: 0.8;
+        font-style: oblique;
+        font-weight: 400;
+      }
+
+      @include desktop {
+        margin: auto;
+        margin-bottom: 1em;
+      }
+    }
+
+    .file__share {
+      height: 100%;
+      overflow-y: scroll;
+      max-height: 65vh;
+      max-width: 65vw;
+
+      // remove scrollbar
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .title {
+        font-family: $lato;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 0.5em;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        background-color: transparent !important;
+        backdrop-filter: blur(20px);
+      }
+
+      .files {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .file {
+        background-color: $neutral !important;
+        padding: 0.5em;
+        font-size: 1rem;
+        text-align: center;
+        margin-inline: 0.5em;
+        .name {
+          font-size: 1.125rem;
+          font-weight: 600;
+          line-height: 1.4;
+        }
+
+        .type {
+          color: lighten($text, 40%);
+        }
+
+        .size {
+          font-size: 0.825rem;
+          color: $accent;
+        }
+      }
+      @include desktop {
+        // max-width: 40vw;
+      }
+    }
+
+    @include desktop {
+      // override mobile and tablet styles
+      position: static;
+      z-index: 1;
+      width: unset;
+      height: unset;
+      inset: unset;
+
+      grid-column: span 3;
+      // reset the sidebar to origin
+      transform: translateX(0);
+      padding-top: 2rem;
+    }
+  }
+}
+
+.show-sidebar {
+  // transform: translateX(23vw);
+  transform: translateX(30vw);
+}
