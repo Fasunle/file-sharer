@@ -3,6 +3,7 @@
 .home {
   // position: relative;
   overflow: hidden;
+  background-color: lighten($secondary, 60%);
 
   // border: 3px green solid;
   @include desktop {
@@ -23,8 +24,8 @@
     bottom: 0;
     right: 0;
     left: 0;
-    top: 5rem;
-    min-height: calc(100vh - 5rem);
+    top: 4rem;
+    min-height: calc(100vh - 4rem);
     // hidden scroll;
     overflow-y: scroll;
     @include hide-scrollbar;
@@ -37,13 +38,14 @@
       width: unset;
       min-height: unset;
       inset: unset;
-      padding-top: 2em;
 
       // desktop styles
       grid-column: 2 / 11;
     }
     // hero section
     &--banner {
+      background-color: lighten($secondary, 60%);
+      padding: 1em 0;
       .banner-header {
         text-align: center;
         padding: 1em;
