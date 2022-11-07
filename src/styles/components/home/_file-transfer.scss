@@ -1,0 +1,119 @@
+@use '../../abstract' as *;
+
+.home {
+  &__content {
+    // file transfer section
+    &--file-transfer {
+      background-color: #fff !important;
+      min-height: 20vh;
+
+      // make the card obvious on small screen
+      margin: 1em;
+      border: 1px solid $neutral;
+      border-radius: 1.2rem;
+      box-shadow: $box-shadow-2;
+
+      // center all the content
+      display: grid;
+      place-content: center;
+      box-shadow: $box-shadow-2;
+
+      // supported types
+      .supported-types {
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        padding-top: 1em;
+      }
+
+      @include tablet-up {
+        border-radius: 1.2rem;
+        max-width: max-content;
+        padding: 0.5em 1em;
+
+        // make container yake their parent height
+        min-height: unset;
+
+        .carpet {
+          border: 5px dashed $neutral;
+          padding: 1.3em;
+        }
+      }
+
+      .transfer-container {
+        background-color: #fff !important;
+        position: relative;
+        max-width: 20rem;
+
+        .file-input {
+          cursor: pointer;
+          position: relative;
+          height: 4rem;
+          opacity: 0;
+          width: 100%;
+
+          left: 0;
+          right: 0;
+          z-index: 2;
+        }
+
+        .btn--upload {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          font-size: 1.8125rem;
+          font-weight: 600;
+          font-family: $lato;
+          padding: 0.5em 1em;
+          margin: auto;
+          background-color: $neutral;
+          gap: 0.5rem;
+
+          // hide button behind input file element
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 1;
+
+          // fill the parent container
+          height: 100%;
+          width: 100%;
+        }
+
+        .icon {
+          cursor: pointer;
+          padding: 0.3em;
+        }
+      }
+
+      .image-tag {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 1em 0;
+        margin-top: 2em;
+
+        .tag-input {
+          border: 1.5px solid darken($neutral, 5%);
+          padding: 0.3em !important;
+          font-size: 1.1rem !important;
+        }
+        .btn-addToList {
+          background-color: darken($neutral, 3%);
+          border: 1px solid darken($neutral, 4%);
+          border-radius: 10px;
+          box-shadow: $box-shadow-2;
+          cursor: pointer;
+          font-size: 1.3rem;
+          padding: 0.4em 0;
+          margin-top: 1rem;
+
+          &:hover {
+            background-color: darken($neutral, 5%);
+          }
+        }
+      }
+    }
+  }
+}

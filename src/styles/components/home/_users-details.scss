@@ -1,0 +1,81 @@
+@use '../../abstract' as *;
+
+.home {
+  // user details
+  .uploader {
+    @include tablet-up {
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+    }
+  }
+
+  .receiver-details {
+    align-self: center;
+    background-color: #fff;
+    max-height: 33vh;
+
+    input {
+      border: 3px solid $neutral;
+      margin-bottom: 1em;
+    }
+
+    // upload button
+    .btn--upload {
+      background-color: $accent;
+      border: 1px solid $neutral;
+      color: lighten($text, 20%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+
+      padding: 0.3em 1em;
+      width: 100%;
+
+      font-size: 2.5rem;
+      line-height: 1;
+
+      // card
+      box-shadow: $box-shadow-2;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: darken($accent, 10%);
+      }
+    }
+
+    @include tablet-up {
+      input {
+        padding: 0.3em !important;
+      }
+
+      .btn--upload {
+        font-size: 1.75rem;
+        line-height: 1.1;
+      }
+    }
+
+    // card
+    border: 1px solid $neutral;
+    box-shadow: $box-shadow-2;
+    border-radius: 1.2rem;
+    padding: 1em;
+    margin: 1em;
+
+    // arrange content
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    @include desktop {
+      margin-inline: 1em;
+      flex: 0.8;
+      padding: 1em;
+    }
+  }
+}

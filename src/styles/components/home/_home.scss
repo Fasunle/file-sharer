@@ -1,0 +1,46 @@
+@use '../../abstract/' as *;
+
+.home {
+  // position: relative;
+  overflow: hidden;
+  background-color: lighten($secondary, 60%);
+
+  // border: 3px green solid;
+  @include desktop {
+    position: static;
+    z-index: 1;
+    width: unset;
+    height: unset;
+
+    // on large screens
+    display: grid;
+    grid-template-columns: 5rem repeat(12, 1fr) 5rem;
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 4rem;
+    min-height: calc(100vh - 4rem);
+    // hidden scroll;
+    overflow-y: scroll;
+    @include hide-scrollbar;
+    z-index: 10;
+
+    @include desktop {
+      // override mobile and tablet styles
+      position: static;
+      z-index: 1;
+      width: unset;
+      min-height: unset;
+      inset: unset;
+
+      // desktop styles
+      grid-column: 2 / 11;
+    }
+  }
+}

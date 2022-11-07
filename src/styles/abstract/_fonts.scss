@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 // base font
-* {
+body {
   color: lighten($text, 40%);
   font-family: $poppins;
   font-weight: 400;
