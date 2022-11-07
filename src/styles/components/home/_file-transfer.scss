@@ -46,6 +46,7 @@
         max-width: 20rem;
 
         .file-input {
+          cursor: pointer;
           position: relative;
           height: 4rem;
           opacity: 0;
@@ -81,6 +82,7 @@
         }
 
         .icon {
+          cursor: pointer;
           padding: 0.3em;
         }
       }
