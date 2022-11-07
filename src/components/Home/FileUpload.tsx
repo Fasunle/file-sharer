@@ -1,5 +1,7 @@
 import {useState, ChangeEvent} from 'react';
-import {useForm} from 'react-hook-form';
+import {useForm, useWatch} from 'react-hook-form';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {Error} from '../errors';
 
 export default function FileUpload() {
