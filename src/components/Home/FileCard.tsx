@@ -1,4 +1,4 @@
-import {IFileCardProps} from './interface';
+import {IFileCardProps} from '../interface';
 
 export default function FileCard({name, size, type}: IFileCardProps) {
   return (
