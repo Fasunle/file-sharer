@@ -1,7 +1,7 @@
 export interface IFileCardProps {
   name: string;
   type: string;
-  size: string;
+  size: string | number;
 }
 
 export type AsidePropsType = {
