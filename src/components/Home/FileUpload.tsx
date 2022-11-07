@@ -1,19 +1,19 @@
-import { useState, ChangeEvent, MouseEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import {useState, ChangeEvent, MouseEvent} from 'react';
+import {useForm} from 'react-hook-form';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Error } from '../errors';
-import { IFile } from '../interface';
-import { useUploadFiles } from '../../api/mutations';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {Error} from '../errors';
+import {IFile} from '../interface';
+import {useUploadFiles} from '../../api/mutations';
 
-type SvgIconPropType = { stroke?: string; strokeWidth?: number };
+type SvgIconPropType = {stroke?: string; strokeWidth?: number};
 
 const initialFileState = {
-  file: { name: '', size: '', type: '' },
+  file: {name: '', size: '', type: ''},
   tag: '',
 };
 
-const SelectButtonIcon = ( { stroke, strokeWidth }: SvgIconPropType ) => (
+const SelectButtonIcon = ({stroke, strokeWidth}: SvgIconPropType) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     fill='none'
@@ -30,7 +30,7 @@ const SelectButtonIcon = ( { stroke, strokeWidth }: SvgIconPropType ) => (
   </svg>
 );
 
-const UploadButtonIcon = ( { stroke, strokeWidth }: SvgIconPropType ) => (
+const UploadButtonIcon = ({stroke, strokeWidth}: SvgIconPropType) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     fill='none'
@@ -48,79 +48,79 @@ const UploadButtonIcon = ( { stroke, strokeWidth }: SvgIconPropType ) => (
 );
 
 // form validator
-const schema = yup.object().shape( {
+const schema = yup.object().shape({
   filename: yup
     .mixed()
-    .test( 'required', 'Please select a file', ( value ) => value && value.length ),
-  tag: yup.string().trim().email().required( 'Image tag is required' ),
-} );
+    .test('required', 'Please select a file', (value) => value && value.length),
+  tag: yup.string().trim().email().required('Image tag is required'),
+});
 
 export default function FileUpload() {
   // files local state
-  const [ tag, setTag ] = useState( '' );
-  const [ file, setFile ] = useState<IFile>( initialFileState );
-  const [ files, setFiles ] = useState<IFile[]>( [] );
+  const [tag, setTag] = useState('');
+  const [file, setFile] = useState<IFile>(initialFileState);
+  const [files, setFiles] = useState<IFile[]>([]);
   // react-query upload files
-  const { mutate: uploadFileMutation } = useUploadFiles();
+  const {mutate: uploadFileMutation} = useUploadFiles();
 
   const {
-    formState: { errors },
+    formState: {errors},
     register,
-  } = useForm<{ file: FileList; tag: string }>( {
-    resolver: yupResolver( schema ),
-  } );
+  } = useForm<{file: FileList; tag: string}>({
+    resolver: yupResolver(schema),
+  });
 
   // handle email input separately
   const {
     register: registerEmail,
     handleSubmit: handleEmailSubmit,
     formState: emailFormState,
-  } = useForm<{ email: string }>();
+  } = useForm<{email: string}>();
 
   // https://pinoria.com/how-to-add-typescript-types-for-react-checkbox-events-and-handlers/#:~:text=To%20add%20TypeScript%20types%20for%20React%20checkbox%20events,%7D%3B%20return%20%3Cinput%20type%3D%22checkbox%22%20onChange%3D%20%7BonChange%7D%20%2F%3E%3B%20%7D%3B
 
-  const handleFileChange = ( e: ChangeEvent<HTMLInputElement> ) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if ( e.target.files !== null ) {
-      const newFile = e.target.files[ 0 ];
-      setFile( { file: newFile, tag: '' } );
+    if (e.target.files !== null) {
+      const newFile = e.target.files[0];
+      setFile({file: newFile, tag: ''});
       // console.log( 'New File\t', { file: e.target.files[ 0 ] } );
     }
   };
 
-  const handleTagChange = ( e: ChangeEvent<HTMLInputElement> ) => {
+  const handleTagChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     // console.log( 'tagging an image' );
-    if ( e.target.value !== '' ) {
+    if (e.target.value !== '') {
       const tag = e.target.value;
-      setTag( tag );
+      setTag(tag);
     }
   };
 
-  const addTagToImage = ( e: MouseEvent<HTMLButtonElement> ) => {
+  const addTagToImage = (e: MouseEvent<HTMLButtonElement>) => {
     // TODO: prevent multiple repeated selection
-    setFiles( [ ...files, { ...file, tag } ] );
+    setFiles([...files, {...file, tag}]);
     // reset tag input
-    setTag( '' );
+    setTag('');
   };
 
-  const uploadFiles = ( email: string ) => {
+  const uploadFiles = (email: string) => {
     const form = new FormData();
 
-    for ( const file of files ) {
-      form.append( 'files', file as any );
+    for (const file of files) {
+      form.append('files', file as any);
     }
     // reciever's email address
-    form.append( 'email', email );
+    form.append('email', email);
 
     // console.log( 'File is uploading...' );
-    uploadFileMutation( form, {
-      onSuccess( { data, status } ) {
+    uploadFileMutation(form, {
+      onSuccess({data, status}) {
         // reset list is successful
-        setFiles( [] );
-        console.log( { data, status } );
+        setFiles([]);
+        console.log({data, status});
       },
-    } );
+    });
     // console.log( 'File is uploaded.' );
   };
 
@@ -133,7 +133,7 @@ export default function FileUpload() {
             <input
               type='file'
               accept='image/png, image/jpg, image/jpeg'
-              {...register( 'file', { required: true } )}
+              {...register('file', {required: true})}
               className='file-input'
               onChange={handleFileChange}
             />
@@ -147,7 +147,7 @@ export default function FileUpload() {
         <div className='image-tag'>
           <input
             type='text'
-            {...register( 'tag', { required: true } )}
+            {...register('tag', {required: true})}
             className='tag-input'
             onChange={handleTagChange}
             placeholder='add tag to the image'
@@ -160,7 +160,7 @@ export default function FileUpload() {
 
       <form
         className='receiver-details'
-        onSubmit={handleEmailSubmit( ( { email } ) => uploadFiles( email ) )}
+        onSubmit={handleEmailSubmit(({email}) => uploadFiles(email))}
       >
         <div className='input-container'>
           {emailFormState.errors.email?.message?.length && (
@@ -177,7 +177,7 @@ export default function FileUpload() {
             type='email'
             id='email'
             placeholder='abc@gmail.com'
-            {...registerEmail( 'email' )}
+            {...registerEmail('email')}
           />
         </div>
 
