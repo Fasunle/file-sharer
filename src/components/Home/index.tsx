@@ -3,7 +3,7 @@ import Header from '../Header';
 import AsideComponent from './Aside';
 import FileUpload from './FileUpload';
 import HeroComponent from './HeroBanner';
-import {IFileCardProps} from './interface';
+import {IFileCardProps} from '../interface';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,5 +1,5 @@
 import FileCard from './FileCard';
-import {AsidePropsType} from './interface';
+import {AsidePropsType} from '../interface';
 
 export default function AsideComponent({files, isOpen}: AsidePropsType) {
   return (
