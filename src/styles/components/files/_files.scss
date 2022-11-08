@@ -23,7 +23,7 @@
     padding: 2rem 0;
     position: sticky;
     top: 5rem;
-    backdrop-filter: blur(20px);
+    background-color: #fff;
 
     .title {
       font-weight: 600;
@@ -39,6 +39,9 @@
       @include tablet-up {
         padding: 0;
         margin-top: 0.5rem;
+
+        background-color: transparent;
+        backdrop-filter: blur(15px);
 
         // increase font on large screen
         .title {
