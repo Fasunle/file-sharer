@@ -1,28 +1,28 @@
 @keyframes loading-animation {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    25% {
-        transform: rotate(90deg);
-    }
+  25% {
+    transform: rotate(90deg);
+  }
 
-    50% {
-        transform: rotate(180deg);
-    }
+  50% {
+    transform: rotate(180deg);
+  }
 
-    75% {
-        transform: rotate(270deg);
-    }
+  75% {
+    transform: rotate(270deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loading {
-    animation: loading-animation infinite 500ms 200ms;
-    width: 3rem;
-    aspect-ratio: 1;
-    object-fit: cover;
+  animation: loading-animation infinite 500ms 200ms;
+  width: 3rem;
+  aspect-ratio: 1;
+  object-fit: cover;
 }

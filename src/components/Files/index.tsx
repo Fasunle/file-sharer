@@ -44,18 +44,14 @@ export default function Files() {
           </div>
         </div>
 
-        <div className='files__list'>
-          {isLoading && (
-            <img
-              className='mx-auto loading'
-              src={loadingIcon}
-              alt='Loading...'
-            />
-          )}
-          {isError && (
-            <div className='mx-auto error'>Loading Files has failed.</div>
-          )}
+        {isLoading && (
+          <img className='mx-auto loading' src={loadingIcon} alt='Loading...' />
+        )}
+        {isError && (
+          <div className='mx-auto error'>Loading Files has failed.</div>
+        )}
 
+        <div className='files__list'>
           {sharedFiles &&
             sharedFiles.map((file) => (
               <FileCard
