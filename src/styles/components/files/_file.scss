@@ -1,0 +1,100 @@
+@use '../../abstract' as *;
+
+.files {
+  &__list {
+    padding-top: 1rem;
+
+    &--item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      max-width: 23.125rem;
+      margin: auto;
+      font-size: 1.2rem;
+
+      > *:not(*:first-child) {
+        padding: 0.25rem;
+        text-align: center;
+      }
+
+      // card item
+      box-shadow: $box-shadow-2;
+      border: 2px solid $neutral;
+      border-radius: $border-radius;
+
+      .info {
+        display: flex;
+        flex-direction: column;
+
+        // typography
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 0.25rem;
+
+        > * {
+          padding: 0.25rem;
+        }
+
+        // title
+        .name {
+          padding: 0.5em;
+          max-width: 25ch;
+          text-overflow: ellipsis;
+
+          .title {
+            color: lighten($text, 50%);
+            font-size: 1.4rem;
+            font-weight: 600;
+          }
+        }
+
+        .type {
+          color: $accent;
+        }
+
+        @include desktop {
+          width: max-content;
+        }
+      }
+
+      .receiver {
+        &--title {
+          border-bottom: 2px solid $accent;
+          color: lighten($text, 50%);
+          font-size: 1.4rem;
+          font-weight: 600;
+          line-height: 1;
+        }
+
+        &--email {
+          font-size: 1.2rem;
+          line-height: 0.8;
+          color: lighten($text, 60%);
+          margin-top: 0.5rem;
+        }
+      }
+
+      .shared-time {
+        font-size: 1.1rem;
+
+        .time {
+          font-weight: 600;
+          font-size: 1.4rem;
+          color: lighten($text, 50%);
+        }
+
+        .date {
+          text-align: justify;
+          padding: 0.2em;
+          color: lighten($text, 60%);
+        }
+      }
+
+      @include tablet-up {
+        flex-direction: row;
+        max-width: fit-content;
+      }
+    }
+  }
+}

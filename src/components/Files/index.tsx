@@ -1,13 +1,18 @@
 import {useState} from 'react';
+import {useFetchAllFiles} from '../../api/queries';
 import Header from '../Header';
+import FileCard from './FileCard';
+import loadingIcon from '../../assets/loader-loading-progress-wait-icon.png';
 
 export default function Files() {
   const [isOpen, setIsOpen] = useState(false);
+  const {isLoading, data: sharedFiles, isError} = useFetchAllFiles();
+
   return (
-    <section className='files-container'>
+    <main className='files-container'>
       <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <main className='files'>
+      <section className='files'>
         <div className='files__header'>
           <h1 className='title'>Shared Files</h1>
           <div className='search-box'>
@@ -40,19 +45,29 @@ export default function Files() {
         </div>
 
         <div className='files__list'>
-          <div className='files__list--item'>
-            <div className='info'>
-              <h2 className='name'>Filename</h2>
-              <p className='type'>Type</p>
-              <p className='file-size'>54 kb</p>
-            </div>
-            <div className='receiver'>
-              <h3>Receiver's Name</h3>
-              <p className='receiver-email'>kfasunle@gmail.com</p>
-            </div>
-          </div>
+          {isLoading && (
+            <img
+              className='mx-auto loading'
+              src={loadingIcon}
+              alt='Loading...'
+            />
+          )}
+          {isError && (
+            <div className='mx-auto error'>Loading Files has failed.</div>
+          )}
+
+          {sharedFiles &&
+            sharedFiles.map((file) => (
+              <FileCard
+                key={file.name}
+                date={file.date}
+                fileType={file.fileType}
+                name={file.name}
+                receiverEmail={file.receiverEmail}
+              />
+            ))}
         </div>
-      </main>
-    </section>
+      </section>
+    </main>
   );
 }
