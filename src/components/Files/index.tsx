@@ -48,7 +48,7 @@ export default function Files() {
           <img className='mx-auto loading' src={loadingIcon} alt='Loading...' />
         )}
         {isError && (
-          <div className='mx-auto error'>Loading Files has failed.</div>
+          <div className='error error--custom'>Loading Files has failed.</div>
         )}
 
         <div className='files__list'>
