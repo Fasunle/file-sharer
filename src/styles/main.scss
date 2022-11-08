@@ -4,7 +4,9 @@
 @use './components/header' as *;
 @use './components/auth' as *;
 @use './components/home' as *;
+@use './components/files' as *;
 @use './form' as *;
+@use './loading-animation' as *;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
