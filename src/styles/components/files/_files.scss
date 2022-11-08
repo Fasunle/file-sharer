@@ -16,6 +16,7 @@
 
   @include desktop {
     max-width: max-content;
+    min-width: 90vw;
   }
 
   &__header {
