@@ -4,3 +4,9 @@ export type FileResponseType = {
   receiverEmail: string;
   date: string;
 };
+
+export interface IUser {
+  userId: string;
+  email: string;
+  username: string;
+}
