@@ -4,6 +4,7 @@ import {apiBaseUrl} from '../config';
 import {FileResponseType, IUser} from './interface';
 
 const fetchAllFiles = async (): Promise<FileResponseType[]> => {
+  const userEmail = localStorage.getItem('userEmail');
   return axios.get(`${apiBaseUrl}/files`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem('accessToken')}`,
