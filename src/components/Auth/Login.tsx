@@ -1,9 +1,10 @@
 import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {signInWithEmailAndPassword, AuthError} from 'firebase/auth';
 import {useState} from 'react';
 import auth from '../../config/auth';
 import {Error} from '../errors';
+import {fetchUser} from '../../api/queries';
 
 const Login = () => {
   const [loginError, setLoginError] = useState('');
@@ -13,12 +14,28 @@ const Login = () => {
     formState: {errors},
   } = useForm<{email: string; password: string}>();
 
+  const navigate = useNavigate();
+
   const signIn = ({email, password}: {email: string; password: string}) => {
     signInWithEmailAndPassword(auth, email as string, password)
-      // TODO: save user information to localStorage
+      // save user information to localStorage
       .then(async (credentials) => {
-        // localStorage.setItem( 'user',  );
-        // console.log({credentials, token: await credentials.user.getIdToken()});
+        const accessToken = await credentials.user.getIdToken();
+        const tokenResult = await credentials.user.getIdTokenResult();
+        const userId = tokenResult.claims.sub;
+
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userId', userId as any);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', credentials.user.refreshToken);
+
+        if (userId) {
+          const {data} = await fetchUser(userId);
+          localStorage.setItem('username', data.username);
+        }
+
+        // redirect to dashboad
+        navigate('/');
       })
       .catch((error: AuthError) => setLoginError(error.message));
   };

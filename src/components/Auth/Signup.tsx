@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {
   AuthError,
   createUserWithEmailAndPassword,
@@ -8,6 +8,7 @@ import {
 import auth from '../../config/auth';
 import {Error} from '../errors';
 import {useState} from 'react';
+import {createUser} from '../../api/mutations';
 
 const Signup = () => {
   const [signupError, setSignupError] = useState('');
@@ -17,23 +18,47 @@ const Signup = () => {
     formState: {errors},
     setValue,
   } = useForm<{email: string; password: string; username: string}>();
-
-  const signUp = ({email, password}: {email: string; password: string}) => {
+  const navigate = useNavigate();
+  const signUp = ({
+    email,
+    password,
+    username,
+  }: {
+    email: string;
+    password: string;
+    username: string;
+  }) => {
     createUserWithEmailAndPassword(auth, email as string, password)
-      // TODO: save user information to localStorage and database
-      .then((credentials: UserCredential) => {
-        console.log({credentials});
+      // save user information to localStorage and database
+      .then(async (credentials: UserCredential) => {
+        const accessToken = await credentials.user.getIdToken();
+        const tokenResult = await credentials.user.getIdTokenResult();
+        const userId = tokenResult.claims.sub;
+
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userId', userId as any);
+        localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', credentials.user.refreshToken);
-        // localStorage.setItem( 'accessToken', credentials.user );
-        // console.log({credentials: credentials.user});
+
+        if (userId) {
+          await createUser({userId: userId, email, username});
+        }
+
         // clear fields after submission
         setValue('email', '');
         setValue('password', '');
         setValue('username', '');
+
+        // redirect to dashboad
+        navigate('/');
       })
       .catch((error: AuthError) => {
         if (error.message.search('auth/email-already-in-use')) {
           setSignupError('User with this email already exist. Login instead.');
+          // send user to login page
+          navigate('/auth/login');
+        } else {
+          setSignupError(error.message);
         }
       });
   };
@@ -41,9 +66,7 @@ const Signup = () => {
     <div className='auth'>
       <form
         className='signup__form'
-        onSubmit={handleSubmit((data) =>
-          signUp({email: data.email, password: data.password}),
-        )}
+        onSubmit={handleSubmit((data) => signUp(data))}
       >
         <h1 className='title'>Signup</h1>
         <div>
