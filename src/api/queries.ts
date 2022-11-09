@@ -4,7 +4,11 @@ import {apiBaseUrl} from '../config';
 import {FileResponseType} from './interface';
 
 const fetchAllFiles = async (): Promise<FileResponseType[]> => {
-  return axios.get(`${apiBaseUrl}/files`, {});
+  return axios.get(`${apiBaseUrl}/files`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  });
 };
 
 export const useFetchAllFiles = () => useQuery('files', fetchAllFiles);
