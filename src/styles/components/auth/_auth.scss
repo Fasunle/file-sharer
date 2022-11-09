@@ -21,7 +21,7 @@
     align-items: stretch;
     justify-content: space-between;
     min-width: 18rem;
-    max-width: clamp(30rem, 40rem, 45rem);
+    max-width: clamp(20rem, 30rem, 45rem);
     margin-inline: auto;
 
     // size
@@ -193,5 +193,7 @@
 
 // push forgot password to the right
 .to-right {
-  transform: translateX(12rem) !important;
+  @include desktop {
+    transform: translateX(12rem) !important;
+  }
 }

@@ -24,7 +24,10 @@ const ForgotPassword = () => {
         setEmail(email);
         setIsSuccess(true);
       })
-      .catch((error: AuthError) => setResetError(error.message));
+      .catch((error: AuthError) => {
+        console.log({error});
+        setResetError(error.message);
+      });
   };
   return (
     <div className='auth auth--reset'>

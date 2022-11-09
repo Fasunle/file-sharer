@@ -17,7 +17,7 @@ label {
 
 input {
   // border: 1px blue dashed;
-  padding: 1rem !important;
+  padding: 0.1em !important;
   transition: outline 400ms ease-in;
   border: 2px $neutral solid;
   color: lighten($text, 20%);

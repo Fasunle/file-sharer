@@ -1,10 +1,12 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import ForgotPassword from './ForgotPassword';
 import Login from './Login';
 
 export default function Auth() {
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const location = useLocation();
+  const initialState = location.pathname === '/auth/reset';
+  const [forgotPassword, setForgotPassword] = useState(initialState);
   return (
     <main className='auth--container'>
       <div className='auth__card--container'>
