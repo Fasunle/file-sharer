@@ -47,11 +47,16 @@ const Signup = () => {
         setValue('email', '');
         setValue('password', '');
         setValue('username', '');
+
+        // redirect to dashboad
+        location.pathname = '/';
       })
       .catch((error: AuthError) => {
         if (error.message.search('auth/email-already-in-use')) {
           setSignupError('User with this email already exist. Login instead.');
         }
+        // send user to login page
+        location.pathname = '/auth/login';
       });
   };
   return (
