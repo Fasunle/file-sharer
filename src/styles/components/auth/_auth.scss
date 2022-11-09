@@ -193,5 +193,7 @@
 
 // push forgot password to the right
 .to-right {
-  transform: translateX(12rem) !important;
+  @include desktop {
+    transform: translateX(12rem) !important;
+  }
 }
