@@ -8,6 +8,7 @@ import {
 import auth from '../../config/auth';
 import {Error} from '../errors';
 import {useState} from 'react';
+import {createUser} from '../../api/mutations';
 
 const Signup = () => {
   const [signupError, setSignupError] = useState('');
@@ -17,15 +18,31 @@ const Signup = () => {
     formState: {errors},
     setValue,
   } = useForm<{email: string; password: string; username: string}>();
-
-  const signUp = ({email, password}: {email: string; password: string}) => {
+  const signUp = ({
+    email,
+    password,
+    username,
+  }: {
+    email: string;
+    password: string;
+    username: string;
+  }) => {
     createUserWithEmailAndPassword(auth, email as string, password)
-      // TODO: save user information to localStorage and database
-      .then((credentials: UserCredential) => {
-        console.log({credentials});
+      // save user information to localStorage and database
+      .then(async (credentials: UserCredential) => {
+        const accessToken = await credentials.user.getIdToken();
+        const tokenResult = await credentials.user.getIdTokenResult();
+        const userId = tokenResult.claims.sub;
+
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userId', userId as any);
+        localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', credentials.user.refreshToken);
-        // localStorage.setItem( 'accessToken', credentials.user );
-        // console.log({credentials: credentials.user});
+
+        if (userId) {
+          await createUser({userId: userId, email, username});
+        }
+
         // clear fields after submission
         setValue('email', '');
         setValue('password', '');
@@ -41,9 +58,7 @@ const Signup = () => {
     <div className='auth'>
       <form
         className='signup__form'
-        onSubmit={handleSubmit((data) =>
-          signUp({email: data.email, password: data.password}),
-        )}
+        onSubmit={handleSubmit((data) => signUp(data))}
       >
         <h1 className='title'>Signup</h1>
         <div>
