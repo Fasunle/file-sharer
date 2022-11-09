@@ -9,8 +9,9 @@ import {useUploadFiles} from '../../api/mutations';
 type SvgIconPropType = {stroke?: string; strokeWidth?: number};
 
 const initialFileState = {
-  file: {name: '', size: '', type: ''},
-  tag: '',
+  name: '',
+  size: '',
+  type: '',
 };
 
 const SelectButtonIcon = ({stroke, strokeWidth}: SvgIconPropType) => (
@@ -59,7 +60,6 @@ export default function FileUpload() {
   // files local state
   const [tag, setTag] = useState('');
   const [file, setFile] = useState<IFile>(initialFileState);
-  const [files, setFiles] = useState<IFile[]>([]);
   // react-query upload files
   const {mutate: uploadFileMutation} = useUploadFiles();
 
@@ -83,7 +83,7 @@ export default function FileUpload() {
     e.preventDefault();
     if (e.target.files !== null) {
       const newFile = e.target.files[0];
-      setFile({file: newFile, tag: ''});
+      setFile(newFile);
       // console.log( 'New File\t', { file: e.target.files[ 0 ] } );
     }
   };
@@ -97,37 +97,29 @@ export default function FileUpload() {
     }
   };
 
-  const addTagToImage = (e: MouseEvent<HTMLButtonElement>) => {
-    // TODO: prevent multiple repeated selection
-    setFiles([...files, {...file, tag}]);
-    // reset tag input
-    setTag('');
-  };
-
   const uploadFiles = (email: string) => {
     const form = new FormData();
 
-    for (const file of files) {
-      form.append('files', file as any);
-    }
+    form.append('tag', tag);
+    form.append('files', file as any);
     // reciever's email address
-    form.append('email', email);
+    form.append('userEmail', localStorage.getItem('userEmail') as string);
+    form.append('receiverEmail', email);
 
-    // console.log( 'File is uploading...' );
+    // console.log('File is uploading...', files);
     uploadFileMutation(form, {
       onSuccess({data, status}) {
         // reset list is successful
-        setFiles([]);
-        console.log({data, status});
+        // console.log({data, status});
       },
     });
-    // console.log( 'File is uploaded.' );
+    // console.log('File is uploaded.');
   };
 
   return (
     <section className='uploader'>
       <form className='home__content--file-transfer'>
-        {!files.length && <Error message={errors.file?.message as string} />}
+        {!file && <Error message={errors.file?.message as string} />}
         <div className='carpet'>
           <div className='transfer-container'>
             <input
@@ -152,9 +144,6 @@ export default function FileUpload() {
             onChange={handleTagChange}
             placeholder='add tag to the image'
           />
-          <button className='btn btn-addToList' onClick={addTagToImage}>
-            Add to List
-          </button>
         </div>
       </form>
 
