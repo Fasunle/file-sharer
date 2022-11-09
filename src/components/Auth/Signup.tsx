@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {
   AuthError,
   createUserWithEmailAndPassword,
@@ -18,6 +18,7 @@ const Signup = () => {
     formState: {errors},
     setValue,
   } = useForm<{email: string; password: string; username: string}>();
+  const navigate = useNavigate();
   const signUp = ({
     email,
     password,
@@ -49,14 +50,16 @@ const Signup = () => {
         setValue('username', '');
 
         // redirect to dashboad
-        location.pathname = '/';
+        navigate('/');
       })
       .catch((error: AuthError) => {
         if (error.message.search('auth/email-already-in-use')) {
           setSignupError('User with this email already exist. Login instead.');
+          // send user to login page
+          navigate('/auth/login');
+        } else {
+          setSignupError(error.message);
         }
-        // send user to login page
-        location.pathname = '/auth/login';
       });
   };
   return (
