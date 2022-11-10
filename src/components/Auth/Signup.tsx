@@ -9,9 +9,11 @@ import auth from '../../config/auth';
 import {Error} from '../errors';
 import {useState} from 'react';
 import {createUser} from '../../api/mutations';
+import {getLoadingState} from '../../styles/components/custom-hook';
 
 const Signup = () => {
   const [signupError, setSignupError] = useState('');
+  const {isLoading, setLoadingState} = getLoadingState();
   const {
     handleSubmit,
     register,
@@ -129,7 +131,13 @@ const Signup = () => {
           />
         </div>
         <Error message={signupError} />
-        <button type='submit' className='signup__form--btn'>
+        <button
+          type='submit'
+          className={`signup__form--btn ${
+            isLoading ? 'loading-state-active' : ''
+          }`}
+          onClick={(e) => setLoadingState()}
+        >
           Signup
           <svg
             xmlns='http://www.w3.org/2000/svg'
