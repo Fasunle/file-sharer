@@ -60,6 +60,8 @@ export default function FileUpload() {
   // files local state
   const [tag, setTag] = useState('');
   const [file, setFile] = useState<IFile>(initialFileState);
+  const [isLoading, setLoadingState] = useState(false);
+
   // react-query upload files
   const {mutate: uploadFileMutation} = useUploadFiles();
 
@@ -112,10 +114,17 @@ export default function FileUpload() {
         // reset list is successful
         // console.log({data, status});
       },
+      onSettled(data, error, variables, context) {
+        setTag('');
+        setFile(initialFileState);
+        setLoadingState(false);
+        location.pathname = '/';
+      },
     });
     // console.log('File is uploaded.');
   };
 
+  console.log('isLoading ', isLoading);
   return (
     <section className='uploader'>
       <form className='home__content--file-transfer'>
@@ -169,8 +178,13 @@ export default function FileUpload() {
             {...registerEmail('email')}
           />
         </div>
-
-        <button type='submit' className='btn btn--upload'>
+        <button
+          type='submit'
+          className={`btn btn--upload ${
+            isLoading ? 'loading-state-active' : ''
+          }`}
+          onClick={() => setLoadingState(true)}
+        >
           Upload
           <UploadButtonIcon stroke='#44445f' />
         </button>
