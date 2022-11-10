@@ -20,6 +20,11 @@ export default function Header({
             </Link>
           </li>
 
+          <li className={`header__nav--item router ${isOpen ? 'mobile' : ''}`}>
+            <Link to='/'>Home</Link>
+            <Link to='/files'>Files</Link>
+          </li>
+
           <li className='header__nav--item'>
             <button
               className='menu'
@@ -58,11 +63,6 @@ export default function Header({
                 </svg>
               )}
             </button>
-          </li>
-
-          <li className='header__nav--item router'>
-            <Link to='/'>Home</Link>
-            <Link to='/files'>Files</Link>
           </li>
 
           <li className='header__nav--item user-profile'>
