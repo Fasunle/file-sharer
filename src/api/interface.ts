@@ -3,6 +3,7 @@ export type FileResponseType = {
   fileType: string;
   receiverEmail: string;
   date: string;
+  tag: string;
 };
 
 export interface IUser {

@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function Files() {
   const [isOpen, setIsOpen] = useState(false);
+  const [tag, setTag] = useState('');
   const [sharedFiles, setSharedFiles] = useState<IFileResponse[]>([]);
 
   const accessToken = localStorage.getItem('accessToken');
@@ -17,10 +18,16 @@ export default function Files() {
     if (accessToken === null) navigate('/auth/login');
     fetchAllFiles()
       .then((data) => {
-        setSharedFiles(data.data.files as any);
+        let files = data.data.files;
+
+        if (tag !== '') {
+          files = files.filter((file) => file.tag === tag);
+        }
+
+        setSharedFiles(files as any);
       })
       .catch((error) => console.error({error}));
-  }, []);
+  }, [tag]);
 
   return (
     <main className='files-container'>
@@ -53,6 +60,7 @@ export default function Files() {
                 name='search'
                 className='search--input'
                 placeholder='search'
+                onChange={(e) => setTag(e.target.value)}
               />
             </label>
           </div>
