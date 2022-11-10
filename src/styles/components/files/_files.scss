@@ -7,6 +7,7 @@
 .files {
   margin-top: 4.5rem;
   height: calc(100vh - 4rem);
+  position: relative;
 
   @include tablet-up {
     max-width: clamp(40rem, 50rem + 2vh, 70%);
@@ -22,9 +23,12 @@
   &__header {
     text-align: center;
     padding: 2rem 0;
-    position: sticky;
+    position: fixed;
+    z-index: 10;
     top: 5rem;
-    background-color: #fff;
+    left: 0;
+    right: 0;
+    background-color: $neutral;
 
     .title {
       font-weight: 600;
@@ -78,6 +82,8 @@
     display: grid;
     gap: 1rem;
     padding-bottom: 1em;
+    margin-top: 15rem;
+    // position: relative;
 
     // allow to scroll
     overflow: hidden;
