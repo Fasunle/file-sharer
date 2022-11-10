@@ -32,13 +32,50 @@
     }
   }
 
-  .user-profile {
+  .user-profile,
+  .router {
     display: none;
   }
 
   @include desktop {
-    .user-profile {
-      display: block;
+    .user-profile,
+    .router {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      .auth-manager {
+        border-radius: 5px;
+
+        .login {
+          background-color: $secondary;
+          border-radius: $border-radius;
+          color: white;
+          padding: 0.25em 1em;
+        }
+
+        .logout {
+          background-color: $primary;
+          border-radius: $border-radius;
+          color: white;
+          padding: 0.5em 1em;
+        }
+      }
+    }
+
+    .router > a {
+      padding: 0.5em 1em;
+      border-radius: $border-radius;
+      text-transform: uppercase;
+      border: 2px solid $secondary;
+      width: 7rem;
+      text-align: center;
+      transition: all 300ms ease-in-out;
+
+      &:hover {
+        background-color: $secondary;
+      }
     }
 
     .menu {
