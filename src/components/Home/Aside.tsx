@@ -1,9 +1,9 @@
 import FileCard from './FileCard';
-import {AsidePropsType, IFile} from '../interface';
-import {useEffect, useState} from 'react';
-import {fetchUser} from '../../api/queries';
-import {useNavigate} from 'react-router-dom';
-import {IUser} from '../../api/interface';
+import { AsidePropsType, IFile } from '../interface';
+import { useEffect, useState } from 'react';
+import { fetchUser } from '../../api/queries';
+import { useNavigate } from 'react-router-dom';
+import { IUser } from '../../api/interface';
 
 const initalUserState = {
   email: 'abc@tenatica.com',
@@ -11,20 +11,20 @@ const initalUserState = {
   username: 'Anonymous',
 };
 
-export default function AsideComponent({files, isOpen}: AsidePropsType) {
+export default function AsideComponent( { files, isOpen }: AsidePropsType ) {
   const navigate = useNavigate();
-  const [user, setUser] = useState<IUser>(initalUserState);
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
+  const [ user, setUser ] = useState<IUser>( initalUserState );
+  useEffect( () => {
+    const userId = localStorage.getItem( 'userId' );
 
-    if (userId !== null && userId !== '') {
-      fetchUser(userId).then((data) => setUser(data.data));
+    if ( userId !== null && userId !== '' ) {
+      fetchUser( userId ).then( ( data ) => setUser( data.data ) );
     } else {
-      navigate('/auth/login');
+      navigate( '/auth/login' );
     }
-  }, [user]);
+  }, [ user ] );
   return (
-    <aside className={`home__sidebar ${isOpen && 'show-sidebar'}`}>
+    <aside className={`home__sidebar ${ isOpen && 'show-sidebar' }`}>
       <ul className='user-info'>
         <li className='username'>
           <h2>{user.username}</h2> <span></span>
@@ -36,14 +36,14 @@ export default function AsideComponent({files, isOpen}: AsidePropsType) {
         <h3 className='title'>Recently Shared</h3>
         <li className='files'>
           {!files.length && <div className='file'>No Shared file</div>}
-          {files.map((file) => (
+          {files.map( ( file ) => (
             <FileCard
               key={file.fileId}
-              name={file.filename.substring(7, 21)}
-              size={''}
+              name={file.filename.substring( 7, 21 )}
+              size={file.receiverEmail}
               type={file.contentType}
             />
-          ))}
+          ) )}
         </li>
       </ul>
     </aside>
