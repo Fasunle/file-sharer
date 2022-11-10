@@ -1,3 +1,4 @@
+import {DateTime} from 'luxon';
 import {FileCardPropTypes} from './interface';
 
 export default function FileCard({
@@ -6,12 +7,14 @@ export default function FileCard({
   fileType,
   receiverEmail,
 }: FileCardPropTypes) {
+  const time = DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_FULL);
+
   return (
     <div className='files__list--item'>
       <div className='info'>
         <div className='name'>
           <h2 className='title'>Name</h2>
-          <p className='name-desc'>{name}</p>
+          <p className='name-desc'>{name.replace('images/', '')}</p>
         </div>
         <p className='type'>{fileType}</p>
       </div>
@@ -21,7 +24,7 @@ export default function FileCard({
       </div>
       <div className='shared-time'>
         <h4 className='time'>Date</h4>
-        <p className='date'>{date}</p>
+        <p className='date'>{time}</p>
       </div>
     </div>
   );

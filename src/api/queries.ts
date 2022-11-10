@@ -3,8 +3,9 @@ import {useQuery} from 'react-query';
 import {apiBaseUrl} from '../config';
 import {FileResponseType, IUser} from './interface';
 
-const fetchAllFiles = async (): Promise<FileResponseType[]> => {
-  const userEmail = localStorage.getItem('userEmail');
+export const fetchAllFiles = async (): Promise<{
+  data: {files: FileResponseType[]};
+}> => {
   return axios.get(`${apiBaseUrl}/files`, {
     headers: {
       authorization: `Bearer ${localStorage.getItem('accessToken')}`,
