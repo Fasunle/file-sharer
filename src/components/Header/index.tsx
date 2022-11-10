@@ -9,7 +9,7 @@ export default function Header({
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
 }) {
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl] = useState('');
   return (
     <header className='header'>
       <nav className='header__nav'>
@@ -20,8 +20,17 @@ export default function Header({
             </Link>
           </li>
 
-          <li className='header__nav--item menu'>
-            <button title='menu' onClick={() => setIsOpen(!isOpen)}>
+          <li className={`header__nav--item router ${isOpen ? 'mobile' : ''}`}>
+            <Link to='/'>Home</Link>
+            <Link to='/files'>Files</Link>
+          </li>
+
+          <li className='header__nav--item'>
+            <button
+              className='menu'
+              title='menu'
+              onClick={() => setIsOpen(!isOpen)}
+            >
               {isOpen ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -57,6 +66,21 @@ export default function Header({
           </li>
 
           <li className='header__nav--item user-profile'>
+            <div className='auth-manager'>
+              {localStorage.getItem('accessToken') === null ? (
+                <Link to='/auth/login' className='login'>
+                  Login
+                </Link>
+              ) : (
+                <Link
+                  to='/auth/login'
+                  className='logout'
+                  onClick={() => localStorage.clear()}
+                >
+                  Logout
+                </Link>
+              )}
+            </div>
             {avatarUrl ? (
               <img src={avatarUrl} alt='tenatica logo' title='user' />
             ) : (
