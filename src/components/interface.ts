@@ -13,3 +13,14 @@ export type AsidePropsType = {
   files: IFileCardProps[];
   isOpen: boolean;
 };
+
+export interface IFileResponse {
+  senderEmail: string;
+  receiverEmail: string;
+  filename: string;
+  fileUrl: string;
+  contentType: string;
+  fileId: string;
+  date: string;
+  tag: string;
+}

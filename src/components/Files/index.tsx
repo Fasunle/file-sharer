@@ -1,12 +1,21 @@
-import {useState} from 'react';
-import {useFetchAllFiles} from '../../api/queries';
+import {useEffect, useState} from 'react';
+import {fetchAllFiles} from '../../api/queries';
 import Header from '../Header';
 import FileCard from './FileCard';
 import loadingIcon from '../../assets/loader-loading-progress-wait-icon.png';
+import {IFileResponse} from '../interface';
 
 export default function Files() {
   const [isOpen, setIsOpen] = useState(false);
-  const {isLoading, data: sharedFiles, isError} = useFetchAllFiles();
+  const [sharedFiles, setSharedFiles] = useState<IFileResponse[]>([]);
+
+  useEffect(() => {
+    fetchAllFiles()
+      .then((data) => {
+        setSharedFiles(data.data.files as any);
+      })
+      .catch((error) => console.error({error}));
+  }, []);
 
   return (
     <main className='files-container'>
@@ -44,24 +53,23 @@ export default function Files() {
           </div>
         </div>
 
-        {isLoading && (
+        {/*{sharedFiles?.length && (
           <img className='mx-auto loading' src={loadingIcon} alt='Loading...' />
         )}
         {isError && (
           <div className='error error--custom'>Loading Files has failed.</div>
-        )}
+        )} */}
 
         <div className='files__list'>
-          {sharedFiles &&
-            sharedFiles.map((file) => (
-              <FileCard
-                key={file.name}
-                date={file.date}
-                fileType={file.fileType}
-                name={file.name}
-                receiverEmail={file.receiverEmail}
-              />
-            ))}
+          {sharedFiles?.map((file) => (
+            <FileCard
+              key={file.filename}
+              date={file.date}
+              fileType={file.contentType}
+              name={file.filename}
+              receiverEmail={file.receiverEmail}
+            />
+          ))}
         </div>
       </section>
     </main>
