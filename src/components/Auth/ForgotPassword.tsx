@@ -5,11 +5,14 @@ import {useState} from 'react';
 import auth from '../../config/auth';
 import {Error} from '../errors';
 import {Info} from '../utils/Info';
+import {getLoadingState} from '../../styles/components/custom-hook';
 
 const ForgotPassword = () => {
   const [resetError, setResetError] = useState('');
   const [email, setEmail] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const {isLoading, setLoadingState} = getLoadingState();
+
   const {
     handleSubmit,
     register,
@@ -66,7 +69,13 @@ const ForgotPassword = () => {
           />
         </div>
 
-        <button type='submit' className='reset__form--btn'>
+        <button
+          type='submit'
+          className={`reset__form--btn ${
+            isLoading ? 'loading-state-active' : ''
+          }`}
+          onClick={(e) => setLoadingState()}
+        >
           Reset
           <svg
             xmlns='http://www.w3.org/2000/svg'
