@@ -12,12 +12,7 @@
   @include tablet-up {
     max-width: clamp(40rem, 50rem + 2vh, 70%);
     margin: auto;
-    margin-top: 4.5rem;
-  }
-
-  @include desktop {
-    max-width: max-content;
-    min-width: 90vw;
+    margin-top: 5rem;
   }
 
   &__header {
@@ -92,6 +87,7 @@
     @include desktop {
       grid-template-columns: repeat(2, 1fr);
       padding-inline: 1em;
+      margin-top: 15rem;
     }
   }
 }
