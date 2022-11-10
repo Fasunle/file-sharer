@@ -4,12 +4,17 @@ import Header from '../Header';
 import FileCard from './FileCard';
 import loadingIcon from '../../assets/loader-loading-progress-wait-icon.png';
 import {IFileResponse} from '../interface';
+import {useNavigate} from 'react-router-dom';
 
 export default function Files() {
   const [isOpen, setIsOpen] = useState(false);
   const [sharedFiles, setSharedFiles] = useState<IFileResponse[]>([]);
 
+  const accessToken = localStorage.getItem('accessToken');
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (accessToken === null) navigate('/auth/login');
     fetchAllFiles()
       .then((data) => {
         setSharedFiles(data.data.files as any);
