@@ -10,7 +10,7 @@ export interface IFile {
 }
 
 export type AsidePropsType = {
-  files: IFileCardProps[];
+  files: IFileResponse[];
   isOpen: boolean;
 };
 

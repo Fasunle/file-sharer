@@ -1,5 +1,5 @@
 import FileCard from './FileCard';
-import {AsidePropsType} from '../interface';
+import {AsidePropsType, IFile} from '../interface';
 import {useEffect, useState} from 'react';
 import {fetchUser} from '../../api/queries';
 import {useNavigate} from 'react-router-dom';
@@ -38,10 +38,10 @@ export default function AsideComponent({files, isOpen}: AsidePropsType) {
           {!files.length && <div className='file'>No Shared file</div>}
           {files.map((file) => (
             <FileCard
-              key={file.name}
-              name={file.name}
-              size={file.size}
-              type={file.type}
+              key={file.fileId}
+              name={file.filename.substring(7, 21)}
+              size={''}
+              type={file.contentType}
             />
           ))}
         </li>
