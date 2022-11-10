@@ -1,28 +1,49 @@
 import FileCard from './FileCard';
-import {AsidePropsType} from '../interface';
+import { AsidePropsType, IFile } from '../interface';
+import { useEffect, useState } from 'react';
+import { fetchUser } from '../../api/queries';
+import { useNavigate } from 'react-router-dom';
+import { IUser } from '../../api/interface';
 
-export default function AsideComponent({files, isOpen}: AsidePropsType) {
+const initalUserState = {
+  email: 'abc@tenatica.com',
+  userId: '',
+  username: 'Anonymous',
+};
+
+export default function AsideComponent( { files, isOpen }: AsidePropsType ) {
+  const navigate = useNavigate();
+  const [ user, setUser ] = useState<IUser>( initalUserState );
+  useEffect( () => {
+    const userId = localStorage.getItem( 'userId' );
+
+    if ( userId !== null && userId !== '' ) {
+      fetchUser( userId ).then( ( data ) => setUser( data.data ) );
+    } else {
+      navigate( '/auth/login' );
+    }
+  }, [ user ] );
   return (
-    <aside className={`home__sidebar ${isOpen && 'show-sidebar'}`}>
+    <aside className={`home__sidebar ${ isOpen && 'show-sidebar' }`}>
       <ul className='user-info'>
         <li className='username'>
-          <h2>Kehinde Fasunle</h2> <span></span>
+          <h2>{user.username}</h2> <span></span>
         </li>
-        <li className='email'>kfasunle@gmail.com</li>
+        <li className='email'>{user.email}</li>
       </ul>
 
       <ul className='file__share'>
         <h3 className='title'>Recently Shared</h3>
         <li className='files'>
           {!files.length && <div className='file'>No Shared file</div>}
-          {files.map((file) => (
+          {files.map( ( file ) => (
             <FileCard
-              key={file.name}
-              name={file.name}
-              size={file.size}
-              type={file.type}
+              key={file.fileId}
+              name={file.filename.substring( 7, 21 )}
+              size={file.receiverEmail}
+              type={file.contentType}
             />
-          ))}
+          ) )}
         </li>
       </ul>
     </aside>

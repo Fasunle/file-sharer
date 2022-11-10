@@ -124,7 +124,6 @@ export default function FileUpload() {
     // console.log('File is uploaded.');
   };
 
-  console.log('isLoading ', isLoading);
   return (
     <section className='uploader'>
       <form className='home__content--file-transfer'>
