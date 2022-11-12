@@ -81,6 +81,7 @@ export default function Files() {
               fileType={file.contentType}
               name={file.filename}
               receiverEmail={file.receiverEmail}
+              fileUrl={file.fileUrl}
             />
           ))}
         </div>

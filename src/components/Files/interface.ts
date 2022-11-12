@@ -3,4 +3,5 @@ export type FileCardPropTypes = {
   fileType: string;
   receiverEmail: string;
   date: string;
+  fileUrl: string;
 };
