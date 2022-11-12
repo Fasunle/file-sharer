@@ -6,26 +6,29 @@ export default function FileCard({
   name,
   fileType,
   receiverEmail,
+  fileUrl,
 }: FileCardPropTypes) {
   const time = DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_FULL);
 
   return (
-    <div className='files__list--item'>
-      <div className='info'>
-        <div className='name'>
-          <h2 className='title'>Name</h2>
-          <p className='name-desc'>{name.replace('images/', '')}</p>
+    <a href={fileUrl} target='_blank'>
+      <div className='files__list--item'>
+        <div className='info'>
+          <div className='name'>
+            <h2 className='title'>Name</h2>
+            <p className='name-desc'>{name.replace('images/', '')}</p>
+          </div>
+          <p className='type'>{fileType}</p>
         </div>
-        <p className='type'>{fileType}</p>
+        <div className='receiver'>
+          <h3 className='receiver--title'>Receiver's Name</h3>
+          <p className='receiver--email'>{receiverEmail}</p>
+        </div>
+        <div className='shared-time'>
+          <h4 className='time'>Date</h4>
+          <p className='date'>{time}</p>
+        </div>
       </div>
-      <div className='receiver'>
-        <h3 className='receiver--title'>Receiver's Name</h3>
-        <p className='receiver--email'>{receiverEmail}</p>
-      </div>
-      <div className='shared-time'>
-        <h4 className='time'>Date</h4>
-        <p className='date'>{time}</p>
-      </div>
-    </div>
+    </a>
   );
 }

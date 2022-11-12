@@ -14,6 +14,8 @@ export default function Files() {
   const accessToken = localStorage.getItem('accessToken');
   const navigate = useNavigate();
 
+  console.log(sharedFiles);
+
   useEffect(() => {
     if (accessToken === null) navigate('/auth/login');
     fetchAllFiles()
@@ -81,6 +83,7 @@ export default function Files() {
               fileType={file.contentType}
               name={file.filename}
               receiverEmail={file.receiverEmail}
+              fileUrl={file.fileUrl}
             />
           ))}
         </div>
