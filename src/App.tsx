@@ -12,7 +12,7 @@ function App() {
       <Route element={<Auth />} path='/auth/reset' />
       <Route element={<Auth />} path='/auth/login' />
       <Route element={<Files />} path='/files' />
-      <Route element={<File />} path='/files/:id' />
+      <Route element={<File />} path='/files/:downloadLink' />
       <Route element={<Home />} path='/' />
     </Routes>
   );
