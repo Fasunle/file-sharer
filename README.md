@@ -1,10 +1,10 @@
-# File Sharing App - tenatica-ui
+# File Sharing App
 
 A file sharing application that allows one user to share a file with another user.
 
 ## Getting started
 
-The app is easy to startup. In development mode, open the `tenatica-ui` root directory and run the following `bash` command.
+The app is easy to startup. In development mode, open the root directory and run the following `bash` command.
 
 ```bash
     yarn dev
@@ -24,7 +24,7 @@ Alternatively, if you favour `npm` or do not have `yarn` installed already, use:
 
 The app can be deployed to production by various methods. For simplicity, we deploy to vercel.
 
-The application is avalable in production at [here](tenatica-ui.vercel.app).
+The application is avalable in production at [here](https://file-sharer.vercel.app).
 
 ## Features
 

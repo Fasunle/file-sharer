@@ -1,6 +1,6 @@
 {
-  "name": "Tenatica | Kehinde Fasunle - File sharing App",
-  "short_name": "tenatica",
+  "name": "Kehinde Fasunle - File sharing App",
+  "short_name": "file-sharer",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

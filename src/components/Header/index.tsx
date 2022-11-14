@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-import logo from '../../assets/tenatica-logo.svg';
+import logo from '../../assets/filesharer-logo.svg';
 
 export default function Header({
   isOpen,
@@ -16,7 +16,7 @@ export default function Header({
         <ul className='header__nav--items'>
           <li className='header__nav--item'>
             <Link to='/'>
-              <img src={logo} alt='tenatica logo' className='logo' />
+              <img src={logo} alt='file-sharer logo' className='logo' />
             </Link>
           </li>
 
@@ -82,7 +82,7 @@ export default function Header({
               )}
             </div>
             {avatarUrl ? (
-              <img src={avatarUrl} alt='tenatica logo' title='user' />
+              <img src={avatarUrl} alt='file-sharer logo' title='user' />
             ) : (
               <svg
                 xmlns='http://www.w3.org/2000/svg'
