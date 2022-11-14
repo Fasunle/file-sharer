@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {IUser} from '../../api/interface';
 
 const initalUserState = {
-  email: 'abc@tenatica.com',
+  email: 'abc@gmail.com',
   userId: '',
   username: 'Anonymous',
 };
